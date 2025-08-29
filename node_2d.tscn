@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bxvsysu8ckhpd"]
+
+[ext_resource type="Script" uid="uid://bpoo3wpvjr54i" path="res://node_2d.gd" id="1_wtcfe"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_wtcfe")
+arr1 = Array[Vector2]([Vector2(-50, -50), Vector2(50, -30)])
+arr2 = PackedVector2Array(-30, -80, 77, -83, 115, 62, 43, 120, -6.05206, 78.8088, -113, -11)
