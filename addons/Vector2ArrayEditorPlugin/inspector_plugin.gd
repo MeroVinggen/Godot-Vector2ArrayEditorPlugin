@@ -25,10 +25,6 @@ func _can_handle(object: Object) -> bool:
 	return true
 
 func _parse_property(object: Object, type: Variant.Type, name: String, hint_type: PropertyHint, hint_string: String, usage_flags: int, wide: bool) -> bool:
-	# Debug ALL array properties
-	if type == TYPE_ARRAY:
-		print("ARRAY PROPERTY - Name: ", name, " | Hint: ", hint_type, " | HintString: '", hint_string, "'")
-	
 	if type == TYPE_PACKED_VECTOR2_ARRAY:
 		var property_editor: Vector2ArrayPropertyEditor = Vector2ArrayPropertyEditor.new()
 		property_editor.setup(_polygon_editor, object, name)
@@ -60,7 +56,6 @@ func _parse_property(object: Object, type: Variant.Type, name: String, hint_type
 					is_vector2_array = true
 		
 		if is_vector2_array:
-			print("CREATING EDITOR for Array[Vector2] property: ", name)
 			var property_editor: Vector2ArrayPropertyEditor = Vector2ArrayPropertyEditor.new()
 			property_editor.setup(_polygon_editor, object, name)
 			

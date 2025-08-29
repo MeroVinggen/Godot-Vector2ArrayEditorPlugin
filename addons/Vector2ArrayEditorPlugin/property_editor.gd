@@ -12,7 +12,7 @@ var _is_editing: bool = false
 var _last_button_state: bool = false
 var _needs_button_update: bool = true
 
-# OPTIMIZED: Hash-based array change detection
+# Hash-based array change detection
 var _last_known_hash: int = 0
 var _sync_timer: Timer
 
@@ -79,12 +79,12 @@ func _setup_sync_monitoring() -> void:
 	_sync_timer.timeout.connect(_check_for_external_changes)
 	add_child(_sync_timer)
 	
-	# OPTIMIZED: Initialize last known state with hash
+	# Initialize last known state with hash
 	if is_instance_valid(_target_object):
 		var current_array: PackedVector2Array = _target_object.get(_property_name)
 		_last_known_hash = _hash_array(current_array)
 
-# OPTIMIZED: Fast hash-based array comparison
+# Fast hash-based array comparison
 func _hash_array(arr: PackedVector2Array) -> int:
 	var hash: int = arr.size()
 	for i: int in range(arr.size()):
@@ -144,7 +144,7 @@ func _check_for_external_changes() -> void:
 	# Convert to PackedVector2Array for consistent processing
 	var current_array: PackedVector2Array = _to_packed_array(current_value)
 	
-	# OPTIMIZED: Hash-based change detection
+	# Hash-based change detection
 	var current_hash: int = _hash_array(current_array)
 	if current_hash != _last_known_hash:
 		_handle_external_array_change(current_array, current_hash)
@@ -230,7 +230,7 @@ func _add_needed_points() -> void:
 	var current_array: PackedVector2Array = _to_packed_array(current_value)
 	var points_needed: int = 3 - current_array.size()
 	
-	# OPTIMIZED: Create new array with pre-allocated size
+	# Create new array with pre-allocated size
 	var new_points: PackedVector2Array = PackedVector2Array()
 	new_points.resize(3)
 	
@@ -386,7 +386,7 @@ func _on_target_property_changed() -> void:
 		if current_hash != _last_known_hash:
 			_handle_external_array_change(current_array, current_hash)
 
-# PUBLIC METHOD: Called by PolygonEditor when vertices change
+# Called by PolygonEditor when vertices change
 func refresh_button_text() -> void:
 	call_deferred("_update_button_text")
 

@@ -31,10 +31,10 @@ var _is_dragging: bool = false
 var _drag_start_pos: Vector2
 var _cursor_pos: Vector2
 
-# NEW: Ghost vertex positioning
+# Ghost vertex positioning
 var _ghost_vertex_pos: Vector2
 
-# OPTIMIZED: Two-way sync with hash-based change detection
+# Two-way sync with hash-based change detection
 var _sync_timer: Timer
 var _last_sync_hash: int = 0
 
@@ -117,7 +117,7 @@ func _on_timer_tick() -> void:
 		_last_sync_hash = current_hash
 		_request_overlay_update()
 
-# OPTIMIZED: Fast hash-based array comparison
+# Fast hash-based array comparison
 func _hash_array(arr: PackedVector2Array) -> int:
 	var hash: int = arr.size()
 	for i: int in range(arr.size()):
@@ -142,7 +142,7 @@ func set_current(object: Object, property: String, property_editor: Vector2Array
 	if object and property and object is CanvasItem:
 		_polygon_data.set_from_object(object, property)
 		
-		# OPTIMIZED: Initialize sync tracking with hash
+		# Initialize sync tracking with hash
 		_last_sync_hash = _hash_array(_polygon_data.vertices)
 		
 		# Start consolidated timer
@@ -230,7 +230,7 @@ func draw_overlay(overlay: Control) -> void:
 	if _polygon_data.vertices.is_empty():
 		return
 	
-	# OPTIMIZED: Pre-transform vertices once for drawing
+	# Pre-transform vertices once for drawing
 	var screen_vertices: PackedVector2Array = PackedVector2Array()
 	screen_vertices.resize(_polygon_data.vertices.size())
 	for i: int in range(_polygon_data.vertices.size()):
@@ -285,8 +285,6 @@ func handle_input(event: InputEvent) -> bool:
 	
 	return handled
 
-# Private methods
-# Replace _is_editing_valid function:
 func _is_editing_valid() -> bool:
 	if not _current_object or not _current_property:
 		return false
@@ -426,7 +424,7 @@ func _handle_mouse_button(event: InputEventMouseButton) -> bool:
 	
 	return false
 
-# OPTIMIZED: Cache transformed vertices for active vertex detection
+# Cache transformed vertices for active vertex detection
 func _get_active_vertex() -> int:
 	var vertices_size: int = _polygon_data.vertices.size()
 	for i: int in range(vertices_size):
@@ -435,7 +433,7 @@ func _get_active_vertex() -> int:
 			return i
 	return -1
 
-# OPTIMIZED: More responsive ghost vertex positioning with exclusion zones
+# More responsive ghost vertex positioning with exclusion zones
 func _get_active_side_optimized() -> Dictionary:
 	var result: Dictionary = {"index": -1, "position": Vector2.ZERO}
 	
@@ -446,7 +444,7 @@ func _get_active_side_optimized() -> Dictionary:
 	if size < 3:  # Need at least 3 vertices to form sides
 		return result
 	
-	# OPTIMIZED: Pre-transform all vertices once
+	# Pre-transform all vertices once
 	var screen_vertices: PackedVector2Array = PackedVector2Array()
 	screen_vertices.resize(size)
 	for i: int in range(size):
@@ -465,7 +463,7 @@ func _get_active_side_optimized() -> Dictionary:
 		var distance_squared: float = (_cursor_pos - closest_point).length_squared()
 		
 		if distance_squared < min_distance_squared:
-			# NEW: Check if ghost vertex would be too close to existing vertices
+			# Check if ghost vertex would be too close to existing vertices
 			var too_close_to_vertex: bool = false
 			var exclusion_radius_squared: float = VERTEX_EXCLUSION_RADIUS * VERTEX_EXCLUSION_RADIUS
 			
@@ -536,6 +534,7 @@ func _end_drag() -> void:
 
 func _do_add_vertex(index: int, vertex: Vector2) -> void:
 	_polygon_data.insert_vertex(index, vertex)
+	# Convert back to original type before setting
 	var original_value = _current_object.get(_current_property)
 	_current_object.set(_current_property, _from_packed_array(_polygon_data.vertices, original_value))
 	_active_vertex_index = index
@@ -544,6 +543,7 @@ func _do_add_vertex(index: int, vertex: Vector2) -> void:
 
 func _do_remove_vertex(index: int) -> void:
 	_polygon_data.remove_vertex(index)
+	# Convert back to original type before setting
 	var original_value = _current_object.get(_current_property)
 	_current_object.set(_current_property, _from_packed_array(_polygon_data.vertices, original_value))
 	_active_vertex_index = -1
@@ -556,7 +556,9 @@ func _do_remove_vertex(index: int) -> void:
 
 func _do_update_vertex(index: int, vertex: Vector2) -> void:
 	_polygon_data.set_vertex(index, vertex)
-	_current_object.set(_current_property, _polygon_data.vertices)
+	# Convert back to original type before setting
+	var original_value = _current_object.get(_current_property)
+	_current_object.set(_current_property, _from_packed_array(_polygon_data.vertices, original_value))
 	_last_sync_hash = _hash_array(_polygon_data.vertices)
 	
 	# Notify property editor for real-time updates
