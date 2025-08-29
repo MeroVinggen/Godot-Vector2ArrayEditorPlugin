@@ -34,6 +34,7 @@ func _handles(object: Object) -> bool:
 func _edit(object: Object) -> void:
 	if _polygon_editor:
 		_polygon_editor.edit(object)
+		update_overlays()
 
 func _forward_canvas_draw_over_viewport(overlay: Control) -> void:
 	if _polygon_editor and _inspector_plugin._is_editing():
