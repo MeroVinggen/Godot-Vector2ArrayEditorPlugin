@@ -14,7 +14,7 @@ Edit Array[Vector2] and PackedVector2Array directly in the editor as if they wer
 
 ## Demo Preview 
 
-![demo-preview1](./github-materials/demo.webp)
+![demo-preview1](./github-materials/demo.gif)
 
 
 ## Features
