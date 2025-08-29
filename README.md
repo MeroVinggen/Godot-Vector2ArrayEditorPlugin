@@ -9,7 +9,7 @@
 
 ## About
 
-This plugin allows you to edit `Array[Vector2]` and `PackedVector2Array` as polygon shape.
+Edit Array[Vector2] and PackedVector2Array directly in the editor as if they were polygons—no extra nodes, no complex setup. Just enable, drag, add, or remove points right on the canvas.
 
 
 ## Demo Preview 
@@ -19,7 +19,7 @@ This plugin allows you to edit `Array[Vector2]` and `PackedVector2Array` as poly
 
 ## Features
 
-- Easy to use
+- Easy to use - simply install, enable and you are ready to go!
 - Edit `Array[Vector2]` and `PackedVector2Array` with power of polygons editing
 - support for CanvasItem nodes (Node2D, Control and any of their subtype)
 - Doesn't impact project performance or complexity
@@ -64,5 +64,5 @@ This plugin allows you to edit `Array[Vector2]` and `PackedVector2Array` as poly
 ## Troubleshooting
 
 - plugin support only CanvasItem nodes, e.g. Node2D, Control and any of their subtype. For all the other the edit btn will be blocked 
-- plugin support only 
-- 
+- plugin support only `Array[Vector2]` or `PackedVector2Array` types and won't work if you have like array of `Vector2` without explicit type 
+- is the node was already in focus before enabling the plugin - refocus it to see the edit buttons
