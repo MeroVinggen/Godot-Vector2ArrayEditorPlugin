@@ -6,6 +6,12 @@
   Godot Vector2Editor Plugin
 </h1>
 
+<p align="center">
+  <a href="https://ko-fi.com/I2I31KH5HB" target="_blank">
+    <img src="https://ko-fi.com/img/githubbutton_sm.svg" alt="Support me on Ko-fi"/>
+  </a>
+</p>
+
 
 ## About
 
