@@ -25,6 +25,10 @@ func _can_handle(object: Object) -> bool:
 	return true
 
 func _parse_property(object: Object, type: Variant.Type, name: String, hint_type: PropertyHint, hint_string: String, usage_flags: int, wide: bool) -> bool:
+	# skip invalid or remote nodes
+	if not is_instance_valid(object) or not object is Node or not object.is_inside_tree():
+		return false
+	
 	if type == TYPE_PACKED_VECTOR2_ARRAY:
 		var property_editor: Vector2ArrayPropertyEditor = Vector2ArrayPropertyEditor.new()
 		property_editor.setup(_polygon_editor, object, name)

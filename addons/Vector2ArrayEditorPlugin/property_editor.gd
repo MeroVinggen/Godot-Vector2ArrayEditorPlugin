@@ -103,8 +103,8 @@ func _check_for_external_changes() -> void:
 		_stop_editing_without_editor_call()
 		return
 	
-	# Check if object is still in the scene tree
-	if not _target_object.is_inside_tree():
+	# Check if object is still in the scene tree and not in remote
+	if not is_instance_valid(_target_object) or not _target_object is Node or not _target_object.is_inside_tree():
 		_stop_editing_without_editor_call()
 		return
 	
