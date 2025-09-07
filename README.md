@@ -71,4 +71,4 @@ Edit Array[Vector2] and PackedVector2Array directly in the editor as if they wer
 
 - plugin support only CanvasItem nodes, e.g. Node2D, Control and any of their subtype. For all the other the edit btn will be blocked 
 - plugin support only `Array[Vector2]` or `PackedVector2Array` types and won't work if you have like array of `Vector2` without explicit type 
-- is the node was already in focus before enabling the plugin - refocus it to see the edit buttons
+- if the node was already in focus before enabling the plugin - refocus it to see the edit buttons
