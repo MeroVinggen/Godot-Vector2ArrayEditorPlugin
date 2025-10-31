@@ -29,6 +29,10 @@ func _parse_property(object: Object, type: Variant.Type, name: String, hint_type
 	if not is_instance_valid(object) or not object is Node or not object.is_inside_tree():
 		return false
 	
+	# Skip properties that aren't meant to be edited (like dictionary internals)
+	if not (usage_flags & PROPERTY_USAGE_EDITOR):
+		return false
+	
 	if type == TYPE_PACKED_VECTOR2_ARRAY:
 		var property_editor: Vector2ArrayPropertyEditor = Vector2ArrayPropertyEditor.new()
 		property_editor.setup(_polygon_editor, object, name)
