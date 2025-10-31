@@ -39,24 +39,18 @@ func _parse_property(object: Object, type: Variant.Type, name: String, hint_type
 		add_custom_control(property_editor)
 		return false
 	elif type == TYPE_ARRAY:
-		# Enhanced Array[Vector2] detection
 		var is_vector2_array: bool = false
 		
-		# Check multiple hint patterns for Array[Vector2]
-		if (hint_string.contains("Vector2") or 
-			hint_string == "5:" or
-			hint_string.begins_with("2/2:") or
-			hint_type == PROPERTY_HINT_TYPE_STRING):
+		# Check for Vector2 (type 5) or Vector2i (type 6)
+		if hint_string == "5:" or hint_string.begins_with("5/") or hint_string == "6:" or hint_string.begins_with("6/"):
 			is_vector2_array = true
-		else:
-			# Additional check - try to examine the actual property value
+		# Fallback: check actual array contents
+		elif hint_string.is_empty() or hint_string.contains("Vector2"):
 			var current_value = object.get(name)
-			if current_value is Array:
-				if current_value.is_empty():
-					# Empty array - assume it could be Vector2 array based on name
-					if name.to_lower().contains("point") or name.to_lower().contains("vertex") or name.to_lower().contains("polygon"):
-						is_vector2_array = true
-				elif current_value.size() > 0 and current_value[0] is Vector2:
+			if current_value is Array and not current_value.is_empty():
+				var first_item = current_value[0]
+				# Accept Vector2 or Vector2i, but not Node2D
+				if (first_item is Vector2 or first_item is Vector2i) and not first_item is Node2D:
 					is_vector2_array = true
 		
 		if is_vector2_array:

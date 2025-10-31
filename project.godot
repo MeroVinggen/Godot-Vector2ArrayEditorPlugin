@@ -11,7 +11,9 @@ config_version=5
 [application]
 
 config/name="Vector2ArrayEditor Plugin"
-config/features=PackedStringArray("4.4", "Mobile")
+config/tags=PackedStringArray("my_plugin")
+config/features=PackedStringArray("4.5", "Mobile")
+config/icon="uid://cfmeido83pshk"
 
 [editor_plugins]
 

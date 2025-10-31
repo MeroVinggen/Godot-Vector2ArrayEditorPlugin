@@ -310,11 +310,8 @@ func _is_editing_valid() -> bool:
 				property_exists = true
 				break
 			elif prop.type == TYPE_ARRAY:
-				# More comprehensive Array[Vector2] detection
-				if (prop.hint_string.contains("Vector2") or 
-					prop.hint_string == "5:" or
-					prop.class_name == "Vector2" or
-					prop.hint_string.begins_with("2/2:")):
+				# Support Array[Vector2] and Array[Vector2i]
+				if prop.hint_string == "5:" or prop.hint_string.begins_with("5/") or prop.hint_string == "6:" or prop.hint_string.begins_with("6/"):
 					property_exists = true
 					break
 	
