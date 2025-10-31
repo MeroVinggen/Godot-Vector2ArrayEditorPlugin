@@ -12,6 +12,11 @@
   </a>
 </p>
 
+## See my other plugins
+
+- [ProjectileOnCurve2D](https://github.com/MeroVinggen/Godot-ProjectileOnCurve2DPlugin)
+- [Threaded Resource Save-Load](https://github.com/MeroVinggen/Godot-ThreadedResourceSaveLoadPlugin/)
+- [Android Internet Connection State](https://github.com/MeroVinggen/Godot-AndroidInternetConnectionStatePlugin)
 
 ## About
 
