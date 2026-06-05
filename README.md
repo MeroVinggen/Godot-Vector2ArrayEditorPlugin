@@ -14,6 +14,7 @@
 
 ## See my other plugins
 
+- [MeshPath3D](https://github.com/MeroVinggen/Godot-MeshPath3D-Plugin)
 - [Projectile on curve 2D](https://github.com/MeroVinggen/Godot-ProjectileOnCurve2DPlugin)
 - [Threaded Resource Save-Load](https://github.com/MeroVinggen/Godot-ThreadedResourceSaveLoadPlugin/)
 - [Android Internet Connection State](https://github.com/MeroVinggen/Godot-AndroidInternetConnectionStatePlugin)
@@ -21,7 +22,7 @@
 
 ## About
 
-Edit Array[Vector2] and PackedVector2Array directly in the editor as if they were polygons—no extra nodes, no complex setup. Just enable, drag, add, or remove points right on the canvas.
+Edit Array[Vector2] and PackedVector2Array directly in the editor as if they were polygons - no extra nodes, no complex setup. Just enable, drag, add, or remove points right in the viewport.
 
 
 ## Demo Preview 

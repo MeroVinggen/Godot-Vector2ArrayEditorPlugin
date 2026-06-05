@@ -5,8 +5,10 @@ extends EditorInspectorPlugin
 var _polygon_editor: PolygonEditor
 var _property_editors: Array[Vector2ArrayPropertyEditor] = []
 
+
 func setup(polygon_editor: PolygonEditor) -> void:
 	_polygon_editor = polygon_editor
+
 
 func cleanup() -> void:
 	# Clean up all property editors with proper signal disconnection
@@ -21,8 +23,10 @@ func cleanup() -> void:
 	_property_editors.clear()
 	_polygon_editor = null
 
+
 func _can_handle(object: Object) -> bool:
 	return true
+
 
 func _parse_property(object: Object, type: Variant.Type, name: String, hint_type: PropertyHint, hint_string: String, usage_flags: int, wide: bool) -> bool:
 	# skip invalid or remote nodes
@@ -69,8 +73,10 @@ func _parse_property(object: Object, type: Variant.Type, name: String, hint_type
 	
 	return false
 
+
 func _on_property_editor_removed(editor: Vector2ArrayPropertyEditor) -> void:
 	_property_editors.erase(editor)
+
 
 func _is_editing() -> bool:
 	return _property_editors.any(func (property_editor: Vector2ArrayPropertyEditor) -> bool: return property_editor._is_editing)
